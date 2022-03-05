@@ -687,7 +687,7 @@ corrplot = function(corr,
   if (method == 'number' && plotCI == 'n') {
     x = (DAT - int) * ifelse(addCoefasPercent, 100, 1) / zoom
     text(Pos[, 1], Pos[, 2], font = number.font, col = col.fill,
-         labels = format(round(x, number.digits), nsmall = number.digits),
+         labels = gsub("0\\.", "\\.", x = sprintf(paste0("%.", number.digits, "f"), x)),
          cex = number.cex)
   }
 
@@ -865,9 +865,10 @@ corrplot = function(corr,
 
   ## add numbers
   if (!is.null(addCoef.col) && method != 'number') {
+    x <- ifelse(addCoefasPercent, 100, 1) / zoom
+  
     text(Pos[, 1], Pos[, 2],  col = addCoef.col,
-         labels = round((DAT - int) * ifelse(addCoefasPercent, 100, 1) / zoom,
-                        number.digits),
+         labels =  gsub("0\\.", "\\.", x = sprintf(paste0("%.", number.digits, "f"), x)),,
          cex = number.cex, font = number.font)
   }
 
