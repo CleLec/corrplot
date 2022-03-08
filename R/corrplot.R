@@ -865,7 +865,7 @@ corrplot = function(corr,
 
   ## add numbers
   if (!is.null(addCoef.col) && method != 'number') {
-    x <- ifelse(addCoefasPercent, 100, 1) / zoom
+    x <- round((DAT - int) * ifelse(addCoefasPercent, 100, 1) / zoom
   
     text(Pos[, 1], Pos[, 2],  col = addCoef.col,
          labels =  gsub("0\\.", "\\.", x = sprintf(paste0("%.", number.digits, "f"), x)),,
